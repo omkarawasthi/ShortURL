@@ -4,7 +4,7 @@ A simple and efficient URL shortener API built with Node.js, Express, and MongoD
 
 ## Deployment Link :
 ```bash
-https://shorturl-zhlq.onrender.com
+https://shorturl-zhlq.onrender.com/
 ```
 
 ## Features
