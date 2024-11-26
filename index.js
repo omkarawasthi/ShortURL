@@ -12,8 +12,8 @@ connectDB();
 
 // Rate limiting middleware for general routes
 const generalLimiter = rateLimit({
-  windowMs: 60000, // 1 minute
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: RATE_LIMIT_WINDOW_MS, // 1 minute
+  max: process.env.RATE_LIMIT_MAX_REQUESTS, // limit each IP to 100 requests per windowMs
   message: {
     error: 'Too many requests',
     message: 'Please try again after some time'
