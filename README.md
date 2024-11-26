@@ -41,10 +41,11 @@ cp .env
 
 4. Update the .env file with your configuration:
 ```
-PORT=3000
-MONGODB_URI=your_mongodb_connection_string
-RATE_LIMIT_WINDOW_MS=60000
-RATE_LIMIT_MAX_REQUESTS=100
+PORT = 3000
+MONGODB_URI = your_mongodb_connection_string
+BASE_URL= your_base_url for API Documentation
+RATE_LIMIT_WINDOW_MS = 60000
+RATE_LIMIT_MAX_REQUESTS = 100
 ```
 
 ## Usage
