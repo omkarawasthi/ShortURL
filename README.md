@@ -2,9 +2,15 @@
 
 A simple and efficient URL shortener API built with Node.js, Express, and MongoDB.
 
-## Deployment Link :
+## Deployment Link
 ```bash
 https://shorturl-zhlq.onrender.com/
+```
+
+## API Documentation
+Access the interactive API documentation at:
+```bash
+https://shorturl-zhlq.onrender.com/api-docs
 ```
 
 ## Features
@@ -13,9 +19,8 @@ https://shorturl-zhlq.onrender.com/
 - Redirect to original URLs
 - Track usage statistics
 - Rate limiting
-- API documentation with Swagger
 - MongoDB integration
-
+- Interactive API documentation with Swagger UI
 
 ## Installation
 
@@ -49,11 +54,10 @@ RATE_LIMIT_MAX_REQUESTS=100
 npm run dev
 ```
 
-
 ## API Endpoints
 
 ### 1. Shorten URL
-- **POST** `/shorten`
+- **POST** `https://shorturl-zhlq.onrender.com/shorten`
 - **Body**: 
 ```json
 {
@@ -69,22 +73,22 @@ npm run dev
 - **Response**:
 ```json
 {
-    "shortUrl": "http://localhost:3000/abc123",
+    "shortUrl": "https://shorturl-zhlq.onrender.com/abc123",
     "shortId": "abc123"
 }
 ```
 
 ### 2. Redirect to Original URL
-- **GET** `/:shortId`
+- **GET** `https://shorturl-zhlq.onrender.com/:shortId`
 - Redirects to the original URL
 
 ### 3. Get URL Statistics
-- **GET** `/stats/:shortId`
+- **GET** `https://shorturl-zhlq.onrender.com/stats/:shortId`
 - **Response**:
 ```json
 {
     "originalUrl": "https://example.com/very-long-url",
-    "shortUrl": "http://localhost:3000/abc123",
+    "shortId": "abc123",
     "clicks": 42,
     "lastAccessed": "2024-01-01T12:00:00.000Z",
     "createdAt": "2024-01-01T10:00:00.000Z"
@@ -99,7 +103,7 @@ The API implements rate limiting to prevent fast access to the API. The followin
 
 ## Error Handling
 
-The API returns appropriate HTTP status codes and error messages:
+The API returns appropriate HTTP status codes:
 - 400: Invalid URL
 - 200: Success
 - 404: URL not found

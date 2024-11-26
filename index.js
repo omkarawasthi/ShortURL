@@ -3,6 +3,8 @@ const cors = require('cors');
 const connectDB = require('./config/database');
 const urlRoutes = require('./routes/url.routes');
 const rateLimit = require('express-rate-limit');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
 
 const app = express();
@@ -12,7 +14,7 @@ connectDB();
 
 // Rate limiting middleware for general routes
 const generalLimiter = rateLimit({
-  windowMs: RATE_LIMIT_WINDOW_MS, // 1 minute
+  windowMs: process.env.RATE_LIMIT_WINDOW_MS, // 1 minute
   max: process.env.RATE_LIMIT_MAX_REQUESTS, // limit each IP to 100 requests per windowMs
   message: {
     error: 'Too many requests',
@@ -34,6 +36,28 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Swagger configuration
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'URL Shortener API',
+      version: '1.0.0',
+      description: 'A simple URL shortener API'
+    },
+    servers: [
+      {
+        url: 'https://shorturl-zhlq.onrender.com',
+        description: 'Production server'
+      }
+    ]
+  },
+  apis: ['./routes/*.js']
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 // Routes
 app.use('/', urlRoutes);
 
@@ -49,4 +73,5 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`API Documentation available at https://shorturl-zhlq.onrender.com/api-docs`);
 });
