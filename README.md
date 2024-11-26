@@ -101,6 +101,7 @@ The API implements rate limiting to prevent fast access to the API. The followin
 
 The API returns appropriate HTTP status codes and error messages:
 - 400: Invalid URL
+- 200: Success
 - 404: URL not found
 - 429: Too many requests
 - 500: Server error
