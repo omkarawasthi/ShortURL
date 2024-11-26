@@ -32,7 +32,10 @@ const generalLimiter = rateLimit({
 app.use(generalLimiter);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin:process.env.BASE_URL,
+  credentials:true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
