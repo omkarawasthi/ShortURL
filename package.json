@@ -15,8 +15,6 @@
     "express-rate-limit": "^7.1.5",
     "mongoose": "^8.0.3",
     "nanoid": "^3.3.7",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {

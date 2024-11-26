@@ -1,7 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
 const connectDB = require('./config/database');
 const urlRoutes = require('./routes/url.routes');
 const rateLimit = require('express-rate-limit');
@@ -15,7 +13,7 @@ connectDB();
 // Rate limiting middleware for general routes
 const generalLimiter = rateLimit({
   windowMs: 60000, // 1 minute
-  max: 100, // limit each IP to 5 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
   message: {
     error: 'Too many requests',
     message: 'Please try again after some time'
@@ -36,27 +34,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Swagger configuration
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'URL Shortener API',
-      version: '1.0.0',
-      description: 'A simple URL shortener API'
-    },
-    servers: [
-      {
-        url: process.env.BASE_URL || 'http://localhost:3000'
-      }
-    ]
-  },
-  apis: ['./src/routes/*.js']
-};
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
 // Routes
 app.use('/', urlRoutes);
 
@@ -72,5 +49,4 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`API Documentation available at http://localhost:${PORT}/api-docs`);
 });
