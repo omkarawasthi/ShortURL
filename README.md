@@ -60,6 +60,12 @@ npm run dev
     "url": "https://example.com/very-long-url"
 }
 ```
+- **Header**:
+```json
+{
+    "Content-Type": "application/json"
+}
+```
 - **Response**:
 ```json
 {
